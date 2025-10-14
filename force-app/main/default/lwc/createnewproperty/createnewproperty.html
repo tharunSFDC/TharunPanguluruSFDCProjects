@@ -1,0 +1,19 @@
+<template>
+
+    <lightning-card icon-name="standard:home" variant="base" title="Create New Property">
+
+        <lightning-input label="Property Name" name="Name" type="text" onchange={getdata} required=true></lightning-input>
+        <lightning-input label="Property State" name="state" type="text" onchange={getdata}></lightning-input>
+        <lightning-input label="Property City" name="city" type="text" onchange={getdata}></lightning-input>
+        <lightning-input label="Property Country" name="country" type="text" onchange={getdata}></lightning-input>
+        <lightning-input label="Property Salesprice" name="price" type="number" onchange={getdata} required=true></lightning-input>
+        <lightning-input label="Property Image" name="image" type="url" onchange={getdata} required=true></lightning-input>
+        <lightning-input label="Property numberofrooms" name="rooms" type="number" onchange={getdata} required=true></lightning-input>
+        <lightning-input label="Property BathRomms" name="bath" type="number" onchange={getdata}></lightning-input>
+        <lightning-button label="Save" variant="brand" onclick={handlesave}></lightning-button>
+        <lightning-button label="Reset" variant="brand" onclick={handlereset}></lightning-button>
+
+
+    </lightning-card>
+
+</template>

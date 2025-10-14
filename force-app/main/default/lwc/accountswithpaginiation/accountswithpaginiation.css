@@ -1,0 +1,9 @@
+.newtesting{
+    height: 300px;
+}
+.paginationcontrols{
+    display: flex;
+    justify-content: center;
+    margin-top: 1rem;
+
+}

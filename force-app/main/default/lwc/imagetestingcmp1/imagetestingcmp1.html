@@ -1,0 +1,14 @@
+<template>
+    <lightning-card icon-name="standard:account" variant="base">
+        <div class="slds-grid slds-gutters">
+            <template for:each={listofproducts} for:item="app">
+            <div class="slds-col slds-size_1-of-4" key={app.Id}>
+                    <p ><img src={app.Product_image__c} alt={app.Name} width="100" height="100"></p>
+                
+              </div>
+            </template>
+ 
+        </div>
+
+    </lightning-card>
+</template>

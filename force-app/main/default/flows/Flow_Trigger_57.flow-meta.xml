@@ -1,0 +1,394 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Flow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>62.0</apiVersion>
+    <areMetricsLoggedToDataCloud>false</areMetricsLoggedToDataCloud>
+    <assignments>
+        <name>assgin_the_value</name>
+        <label>assgin the value</label>
+        <locationX>1370</locationX>
+        <locationY>719</locationY>
+        <assignmentItems>
+            <assignToReference>$Record.Offer_Price__c</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>forpercal</elementReference>
+            </value>
+        </assignmentItems>
+    </assignments>
+    <assignments>
+        <name>assign_the_discount_value</name>
+        <label>assign the discount value</label>
+        <locationX>50</locationX>
+        <locationY>719</locationY>
+        <assignmentItems>
+            <assignToReference>$Record.Offer_Price__c</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>caluclate</elementReference>
+            </value>
+        </assignmentItems>
+    </assignments>
+    <customErrors>
+        <name>fill_the_percent</name>
+        <label>fill the percent</label>
+        <locationX>2162</locationX>
+        <locationY>611</locationY>
+        <customErrorMessages>
+            <errorMessage>Please fill these filed</errorMessage>
+            <fieldSelection>Percentage_Discount__c</fieldSelection>
+            <isFieldError>true</isFieldError>
+        </customErrorMessages>
+    </customErrors>
+    <customErrors>
+        <name>no_offer_type_have_been_selected</name>
+        <label>no offer type have been selected</label>
+        <locationX>2690</locationX>
+        <locationY>503</locationY>
+        <customErrorMessages>
+            <errorMessage>No offer type have been select for these record</errorMessage>
+            <fieldSelection>Offer_Type__c</fieldSelection>
+            <isFieldError>true</isFieldError>
+        </customErrorMessages>
+    </customErrors>
+    <customErrors>
+        <name>show_error_on_flat_discount_greater_than_0</name>
+        <label>show error on flat discount greater than 0</label>
+        <locationX>314</locationX>
+        <locationY>719</locationY>
+        <customErrorMessages>
+            <errorMessage>Flat discount and Original price should be greater than 0</errorMessage>
+            <isFieldError>false</isFieldError>
+        </customErrorMessages>
+    </customErrors>
+    <customErrors>
+        <name>show_error_pre_should_be_greater_than_0</name>
+        <label>show error pre should be greater than 0</label>
+        <locationX>1634</locationX>
+        <locationY>719</locationY>
+        <customErrorMessages>
+            <errorMessage>Discount precentage and Original price should be greater than 0</errorMessage>
+            <isFieldError>false</isFieldError>
+        </customErrorMessages>
+    </customErrors>
+    <customErrors>
+        <name>Show_the_Error</name>
+        <label>Show the Error</label>
+        <locationX>842</locationX>
+        <locationY>611</locationY>
+        <customErrorMessages>
+            <errorMessage>Fill the Flat Discount</errorMessage>
+            <fieldSelection>Flat_Discount__c</fieldSelection>
+            <isFieldError>true</isFieldError>
+        </customErrorMessages>
+    </customErrors>
+    <customErrors>
+        <name>show_the_error_message</name>
+        <label>show the error message</label>
+        <locationX>2954</locationX>
+        <locationY>395</locationY>
+        <customErrorMessages>
+            <errorMessage>Please check the Offer</errorMessage>
+            <fieldSelection>Offer_Available__c</fieldSelection>
+            <isFieldError>true</isFieldError>
+        </customErrorMessages>
+    </customErrors>
+    <decisions>
+        <name>and_check_for_the_falt_discount_as_well</name>
+        <label>and check for the falt discount as well</label>
+        <locationX>710</locationX>
+        <locationY>503</locationY>
+        <defaultConnectorLabel>Default Outcome</defaultConnectorLabel>
+        <rules>
+            <name>is_discount</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>$Record.Flat_Discount__c</leftValueReference>
+                <operator>IsNull</operator>
+                <rightValue>
+                    <booleanValue>false</booleanValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>check_the_value_in_it</targetReference>
+            </connector>
+            <label>is discount</label>
+        </rules>
+        <rules>
+            <name>is_flat_discount_is_null</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>$Record.Flat_Discount__c</leftValueReference>
+                <operator>IsNull</operator>
+                <rightValue>
+                    <booleanValue>true</booleanValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Show_the_Error</targetReference>
+            </connector>
+            <label>is  flat discount is null</label>
+        </rules>
+    </decisions>
+    <decisions>
+        <name>check_for_the_discount_above_the_0</name>
+        <label>check for the discount above the 0</label>
+        <locationX>1634</locationX>
+        <locationY>611</locationY>
+        <defaultConnectorLabel>Default Outcome</defaultConnectorLabel>
+        <rules>
+            <name>is_above_0</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>$Record.Percentage_Discount__c</leftValueReference>
+                <operator>GreaterThan</operator>
+                <rightValue>
+                    <numberValue>0.0</numberValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>$Record.Original_Price__c</leftValueReference>
+                <operator>GreaterThan</operator>
+                <rightValue>
+                    <numberValue>0.0</numberValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>assgin_the_value</targetReference>
+            </connector>
+            <label>is above 0</label>
+        </rules>
+        <rules>
+            <name>below_0</name>
+            <conditionLogic>or</conditionLogic>
+            <conditions>
+                <leftValueReference>$Record.Percentage_Discount__c</leftValueReference>
+                <operator>LessThanOrEqualTo</operator>
+                <rightValue>
+                    <numberValue>0.0</numberValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>$Record.Original_Price__c</leftValueReference>
+                <operator>LessThan</operator>
+                <rightValue>
+                    <numberValue>0.0</numberValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>show_error_pre_should_be_greater_than_0</targetReference>
+            </connector>
+            <label>below 0</label>
+        </rules>
+    </decisions>
+    <decisions>
+        <name>check_for_the_offer_avalibale</name>
+        <label>check for the offer avalibale</label>
+        <locationX>2459</locationX>
+        <locationY>287</locationY>
+        <defaultConnectorLabel>Default Outcome</defaultConnectorLabel>
+        <rules>
+            <name>is_offer</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>$Record.Offer_Available__c</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <booleanValue>true</booleanValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>check_for_the_offer_type</targetReference>
+            </connector>
+            <label>is offer</label>
+        </rules>
+        <rules>
+            <name>is_offer_flase</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>$Record.Offer_Available__c</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <booleanValue>false</booleanValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>show_the_error_message</targetReference>
+            </connector>
+            <label>is offer flase</label>
+        </rules>
+    </decisions>
+    <decisions>
+        <name>check_for_the_offer_type</name>
+        <label>check for the offer type</label>
+        <locationX>1700</locationX>
+        <locationY>395</locationY>
+        <defaultConnector>
+            <targetReference>no_offer_type_have_been_selected</targetReference>
+        </defaultConnector>
+        <defaultConnectorLabel>Default Outcome</defaultConnectorLabel>
+        <rules>
+            <name>is_Flat</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>$Record.Offer_Type__c</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>Flat</stringValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>and_check_for_the_falt_discount_as_well</targetReference>
+            </connector>
+            <label>is Flat</label>
+        </rules>
+        <rules>
+            <name>is_per</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>$Record.Offer_Type__c</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>Percentage</stringValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>is_per_null_check</targetReference>
+            </connector>
+            <label>is per</label>
+        </rules>
+    </decisions>
+    <decisions>
+        <name>check_the_value_in_it</name>
+        <label>check the value in it</label>
+        <locationX>314</locationX>
+        <locationY>611</locationY>
+        <defaultConnectorLabel>Default Outcome</defaultConnectorLabel>
+        <rules>
+            <name>should_above_0</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>$Record.Flat_Discount__c</leftValueReference>
+                <operator>GreaterThan</operator>
+                <rightValue>
+                    <numberValue>0.0</numberValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>$Record.Original_Price__c</leftValueReference>
+                <operator>GreaterThan</operator>
+                <rightValue>
+                    <numberValue>0.0</numberValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>assign_the_discount_value</targetReference>
+            </connector>
+            <label>should above 0</label>
+        </rules>
+        <rules>
+            <name>less_than_0</name>
+            <conditionLogic>or</conditionLogic>
+            <conditions>
+                <leftValueReference>$Record.Flat_Discount__c</leftValueReference>
+                <operator>LessThanOrEqualTo</operator>
+                <rightValue>
+                    <numberValue>0.0</numberValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>$Record.Original_Price__c</leftValueReference>
+                <operator>LessThanOrEqualTo</operator>
+                <rightValue>
+                    <numberValue>0.0</numberValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>show_error_on_flat_discount_greater_than_0</targetReference>
+            </connector>
+            <label>less than 0</label>
+        </rules>
+    </decisions>
+    <decisions>
+        <name>is_per_null_check</name>
+        <label>is per null check</label>
+        <locationX>2030</locationX>
+        <locationY>503</locationY>
+        <defaultConnectorLabel>Default Outcome</defaultConnectorLabel>
+        <rules>
+            <name>is_perscentage</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>$Record.Offer_Type__c</leftValueReference>
+                <operator>IsNull</operator>
+                <rightValue>
+                    <booleanValue>false</booleanValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>check_for_the_discount_above_the_0</targetReference>
+            </connector>
+            <label>is perscentage</label>
+        </rules>
+        <rules>
+            <name>is_null_per</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>$Record.Offer_Type__c</leftValueReference>
+                <operator>IsNull</operator>
+                <rightValue>
+                    <booleanValue>true</booleanValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>fill_the_percent</targetReference>
+            </connector>
+            <label>is null per</label>
+        </rules>
+    </decisions>
+    <description>Write a Flow to validate product discounts and calculate the offer price based on the offer type. The Flow ensures that when a product has an offer available, the appropriate discount is provided and vaild. If the offer type is Flat, a flat discount must be specified. If the offer type is percentae, a percenage discount must be specified. The offer price is calculaed accordingly based on the original price and discount provided.</description>
+    <environments>Default</environments>
+    <formulas>
+        <name>caluclate</name>
+        <dataType>Number</dataType>
+        <expression>{!$Record.Original_Price__c}-{!$Record.Flat_Discount__c}</expression>
+        <scale>0</scale>
+    </formulas>
+    <formulas>
+        <name>forpercal</name>
+        <dataType>Number</dataType>
+        <expression>{!$Record.Original_Price__c}-({!$Record.Original_Price__c}*{!$Record.Percentage_Discount__c}/100)</expression>
+        <scale>0</scale>
+    </formulas>
+    <interviewLabel>Flow Trigger 57 {!$Flow.CurrentDateTime}</interviewLabel>
+    <label>Flow Trigger 57</label>
+    <processMetadataValues>
+        <name>BuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>CanvasMode</name>
+        <value>
+            <stringValue>AUTO_LAYOUT_CANVAS</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>OriginBuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processType>AutoLaunchedFlow</processType>
+    <start>
+        <locationX>2333</locationX>
+        <locationY>0</locationY>
+        <connector>
+            <targetReference>check_for_the_offer_avalibale</targetReference>
+        </connector>
+        <object>order_custom__c</object>
+        <recordTriggerType>CreateAndUpdate</recordTriggerType>
+        <triggerType>RecordBeforeSave</triggerType>
+    </start>
+    <status>Obsolete</status>
+</Flow>

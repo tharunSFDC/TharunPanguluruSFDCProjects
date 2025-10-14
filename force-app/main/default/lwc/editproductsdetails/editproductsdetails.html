@@ -1,0 +1,34 @@
+<template>
+    <lightning-card icon-name="standard:product_service_campaign_item" variant="base" title="Update Product">
+        <div class="slds-p-around_x-large">
+        <lightning-layout>
+            <lightning-layout-item size="6" padding="around-small">
+
+                <lightning-input label="Product Name" name="name" type="text" onchange={getdata}
+                    value={prodcutsName}></lightning-input>
+                <lightning-input label="Product Code" name="code" type="text" onchange={getdata}
+                    value={prodcutsProductCode}></lightning-input>
+                <lightning-input label="Product Family" name="family" type="text" onchange={getdata}
+                    value={prodcutsProductFamily}></lightning-input>
+
+
+            </lightning-layout-item>
+
+            <lightning-layout-item size="6" padding="around-small">
+                <lightning-input label="Product Active" name="active" type="checkbox" onchange={getdata}
+                    value={prodcutsIsActive}></lightning-input>
+
+                <lightning-input label="Product cost" name="cost" type="text" onchange={getdata}
+                    value={prodcutsProductCost}></lightning-input>
+                <lightning-input label="Product Description" name="des" type="text" onchange={getdata}
+                    value={prodcutdes}></lightning-input>
+                <lightning-input label="Product Url" name="image" type="url" onchange={getdata}
+                    value={prodcutsurl}></lightning-input>
+            </lightning-layout-item>
+        </lightning-layout>
+    </div>
+    <lightning-button variant="brand" label="Save" onclick={handleSave}
+    class="slds-m-left_x-small"></lightning-button>
+
+    </lightning-card>
+</template>

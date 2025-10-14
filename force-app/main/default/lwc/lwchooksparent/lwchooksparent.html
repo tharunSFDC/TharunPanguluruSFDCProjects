@@ -1,0 +1,19 @@
+<template>
+
+    <lightning-card title="Parent lwc Hooks Cmp">
+        <p>These is parent Cmp</p>
+        <lightning-input label="Value" type="text" onkeyup={valueup}></lightning-input>
+        <p>{name}</p>
+        <template if:true={ischild}>
+            <lightning-button label="Hide Child" variant="brand" onclick={handlechild}></lightning-button>
+        </template>
+        <template if:false={ischild}>
+            <lightning-button label="Show Child" variant="brand" onclick={handlechild}></lightning-button>
+        </template>
+        <template if:true={ischild}>
+            <c-lwchookschildcmp></c-lwchookschildcmp>
+        </template>
+        
+    </lightning-card>
+    
+</template>

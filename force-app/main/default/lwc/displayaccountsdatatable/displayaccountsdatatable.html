@@ -1,0 +1,15 @@
+<template>
+    <lightning-card icon-name="standard:account" variant="base" title="Accounts ">
+
+        <div class="newtesting">
+        <lightning-datatable 
+        key-field="Id" 
+        data={accounts} 
+        columns={columns} 
+        enable-infinite-loading={enableinfiniteloading}
+        onloadmore={onloadmorehandler}></lightning-datatable>
+    </div>
+  
+    </lightning-card>
+    
+</template>

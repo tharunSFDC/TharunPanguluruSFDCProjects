@@ -1,0 +1,235 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Flow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>62.0</apiVersion>
+    <areMetricsLoggedToDataCloud>false</areMetricsLoggedToDataCloud>
+    <assignments>
+        <name>Assign_the_accountids_into_collection_var</name>
+        <label>Assign the accountids into collection var</label>
+        <locationX>611</locationX>
+        <locationY>395</locationY>
+        <assignmentItems>
+            <assignToReference>Accountids</assignToReference>
+            <operator>Add</operator>
+            <value>
+                <elementReference>$Record.Id</elementReference>
+            </value>
+        </assignmentItems>
+        <connector>
+            <targetReference>check_the_collection_accountids</targetReference>
+        </connector>
+    </assignments>
+    <assignments>
+        <name>update_the_Contacts_Accountid_to_Null</name>
+        <label>update the Contacts Accountid to Null</label>
+        <locationX>270</locationX>
+        <locationY>935</locationY>
+        <assignmentItems>
+            <assignToReference>instancecon.Id</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>loop_through_the_get_contacts.Id</elementReference>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>instancecon.AccountId</assignToReference>
+            <operator>Assign</operator>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>Conupdate</assignToReference>
+            <operator>Add</operator>
+            <value>
+                <elementReference>instancecon</elementReference>
+            </value>
+        </assignmentItems>
+        <connector>
+            <targetReference>loop_through_the_get_contacts</targetReference>
+        </connector>
+    </assignments>
+    <decisions>
+        <name>check_the_collection_accountids</name>
+        <label>check the collection accountids</label>
+        <locationX>611</locationX>
+        <locationY>503</locationY>
+        <defaultConnectorLabel>Default Outcome</defaultConnectorLabel>
+        <rules>
+            <name>null_check_the_ids</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>Accountids</leftValueReference>
+                <operator>IsNull</operator>
+                <rightValue>
+                    <booleanValue>false</booleanValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>get_contacts_realted_to_account</targetReference>
+            </connector>
+            <label>null check the ids</label>
+        </rules>
+    </decisions>
+    <decisions>
+        <name>Check_the_coming_record</name>
+        <label>Check the coming record</label>
+        <locationX>858</locationX>
+        <locationY>287</locationY>
+        <defaultConnectorLabel>Default Outcome</defaultConnectorLabel>
+        <rules>
+            <name>null_check</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>$Record.Id</leftValueReference>
+                <operator>IsNull</operator>
+                <rightValue>
+                    <booleanValue>false</booleanValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Assign_the_accountids_into_collection_var</targetReference>
+            </connector>
+            <label>null check</label>
+        </rules>
+    </decisions>
+    <decisions>
+        <name>get_records_null_check</name>
+        <label>get records null check</label>
+        <locationX>380</locationX>
+        <locationY>719</locationY>
+        <defaultConnectorLabel>Default Outcome</defaultConnectorLabel>
+        <rules>
+            <name>is_Contacts</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>get_contacts_realted_to_account</leftValueReference>
+                <operator>IsNull</operator>
+                <rightValue>
+                    <booleanValue>false</booleanValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>loop_through_the_get_contacts</targetReference>
+            </connector>
+            <label>is Contacts</label>
+        </rules>
+    </decisions>
+    <decisions>
+        <name>null_check_on_the_conupdate_list</name>
+        <label>null check on the conupdate list</label>
+        <locationX>182</locationX>
+        <locationY>1127</locationY>
+        <defaultConnectorLabel>Default Outcome</defaultConnectorLabel>
+        <rules>
+            <name>is_Conupdate</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>Conupdate</leftValueReference>
+                <operator>IsNull</operator>
+                <rightValue>
+                    <booleanValue>false</booleanValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>update_the_contacts</targetReference>
+            </connector>
+            <label>is Conupdate</label>
+        </rules>
+    </decisions>
+    <description>Write a Flow to prevent the deleteion of relalted contacts when their parent account is deleted</description>
+    <environments>Default</environments>
+    <interviewLabel>Flow Trigger 70 {!$Flow.CurrentDateTime}</interviewLabel>
+    <label>Flow Trigger 70</label>
+    <loops>
+        <name>loop_through_the_get_contacts</name>
+        <label>loop through the get contacts</label>
+        <locationX>182</locationX>
+        <locationY>827</locationY>
+        <collectionReference>get_contacts_realted_to_account</collectionReference>
+        <iterationOrder>Asc</iterationOrder>
+        <nextValueConnector>
+            <targetReference>update_the_Contacts_Accountid_to_Null</targetReference>
+        </nextValueConnector>
+        <noMoreValuesConnector>
+            <targetReference>null_check_on_the_conupdate_list</targetReference>
+        </noMoreValuesConnector>
+    </loops>
+    <processMetadataValues>
+        <name>BuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>CanvasMode</name>
+        <value>
+            <stringValue>AUTO_LAYOUT_CANVAS</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>OriginBuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processType>AutoLaunchedFlow</processType>
+    <recordLookups>
+        <name>get_contacts_realted_to_account</name>
+        <label>get contacts realted to account</label>
+        <locationX>380</locationX>
+        <locationY>611</locationY>
+        <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
+        <connector>
+            <targetReference>get_records_null_check</targetReference>
+        </connector>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>AccountId</field>
+            <operator>In</operator>
+            <value>
+                <elementReference>Accountids</elementReference>
+            </value>
+        </filters>
+        <getFirstRecordOnly>false</getFirstRecordOnly>
+        <object>Contact</object>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </recordLookups>
+    <recordUpdates>
+        <name>update_the_contacts</name>
+        <label>update the contacts</label>
+        <locationX>50</locationX>
+        <locationY>1235</locationY>
+        <inputReference>Conupdate</inputReference>
+    </recordUpdates>
+    <start>
+        <locationX>732</locationX>
+        <locationY>0</locationY>
+        <connector>
+            <targetReference>Check_the_coming_record</targetReference>
+        </connector>
+        <object>Account</object>
+        <recordTriggerType>Delete</recordTriggerType>
+        <triggerType>RecordBeforeDelete</triggerType>
+    </start>
+    <status>Draft</status>
+    <variables>
+        <name>Accountids</name>
+        <dataType>String</dataType>
+        <isCollection>true</isCollection>
+        <isInput>false</isInput>
+        <isOutput>false</isOutput>
+    </variables>
+    <variables>
+        <name>Conupdate</name>
+        <dataType>SObject</dataType>
+        <isCollection>true</isCollection>
+        <isInput>false</isInput>
+        <isOutput>false</isOutput>
+        <objectType>Contact</objectType>
+    </variables>
+    <variables>
+        <name>instancecon</name>
+        <dataType>SObject</dataType>
+        <isCollection>false</isCollection>
+        <isInput>false</isInput>
+        <isOutput>false</isOutput>
+        <objectType>Contact</objectType>
+    </variables>
+</Flow>

@@ -1,0 +1,11 @@
+<template>
+
+    <lightning-card icon-name="standard:account" variant="base">
+
+        <lightning-input label="Name" name="AccountName" type="text" onchange={handledata}></lightning-input>
+        <lightning-button label="Save" variant="brand" onclick={handlesave}></lightning-button>
+
+        <c-contactforaccount accountid={accid}></c-contactforaccount>
+    </lightning-card>
+    
+</template>

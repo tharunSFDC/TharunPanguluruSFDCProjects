@@ -1,0 +1,98 @@
+<template>
+
+    <lightning-card title="List of Propertys" icon-name="standard:home" variant="base">
+
+        <lightning-combobox name="propertys" value={viewType} options={options}
+            onchange={handlevalue}>
+        </lightning-combobox>
+
+        <template if:true={islistview}>
+
+            <table class="slds-table slds-table_cell-buffer slds-table_bordered slds-table_col-bordered"
+                aria-label="Example table of Opportunities with vertical borders">
+                <thead>
+                    <tr class="slds-line-height_reset">
+                        <th class="" scope="col">
+                            <div class="slds-truncate" title="Property">Index</div>
+                        </th>
+                        <th class="" scope="col">
+                            <div class="slds-truncate" title="Property">Property Name</div>
+                        </th>
+                        <th class="" scope="col">
+                            <div class="slds-truncate" title="Property">State</div>
+                        </th>
+                        <th class="" scope="col">
+                            <div class="slds-truncate" title="Property">City</div>
+                        </th>
+                        <th class="" scope="col">
+                            <div class="slds-truncate" title="Property">Country</div>
+                        </th>
+                        <th class="" scope="col">
+                            <div class="slds-truncate" title="Property">Number of Rooms</div>
+                        </th>
+                        <th class="" scope="col">
+                            <div class="slds-truncate" title="Property">Sale price</div>
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <template for:each={listpropertystodisplay} for:item="poo" for:index="index">
+                        <tr class="slds-hint-parent" key={poo.Id}>
+                            <td data-label="Property">
+                                <div class="slds-truncate" title="Property">
+                                    <a href="#" tabindex="-1">{index}</a>
+                                </div>
+                            </td>
+                            <td data-label="Property">
+                                <div class="slds-truncate" title="Property">
+                                    <a href="#" tabindex="-1">{poo.Name}</a>
+                                </div>
+                            </td>
+                            <td data-label="Property">
+                                <div class="slds-truncate" title="Property">{poo.State__c}</div>
+                            </td>
+                            <td data-label="Property">
+                                <div class="slds-truncate" title="Property">{poo.City__c}</div>
+                            </td>
+                            <td data-label="Property">
+                                <div class="slds-truncate" title="Property">{poo.Country__c}</div>
+                            </td>
+                            <td data-label="Property">
+                                <div class="slds-truncate" title="Property%">{poo.Number_of_Rooms__c}</div>
+                            </td>
+                            <td data-label="Property">
+                                <div class="slds-truncate" title="Property">
+                                    <a href="#" tabindex="-1">{poo.Sales_Price__c}</a>
+
+                                </div>
+                            </td>
+                        </tr>
+                    </template>
+                </tbody>
+            </table>
+        </template>
+
+        <template if:true={ispictureview}>
+            <div class="product-grid">
+
+                <template for:each={listpropertystodisplay} for:item="pro">
+                    <div key={pro.Id} class="product-item">
+                        <img src={pro.Thumbnail__c} alt={pro.Name}>
+                        <p class="slds-badge slds-badge_brand">Property:>Name: {pro.Name}</p>
+                        <p class="slds-badge slds-badge_brand">Property:>SalesPrice: {pro.Sales_Price__c}</p>
+                        <p class="slds-badge slds-badge_brand">Property:>Number of Rooms: {pro.Number_of_Rooms__c}</p>
+                        <lightning-button label="View Property" variant="brand" value={pro.Id}
+                            onclick={handleid}></lightning-button>
+
+                    </div>
+                </template>
+            </div>
+
+
+        </template>
+
+
+
+    </lightning-card>
+
+</template>

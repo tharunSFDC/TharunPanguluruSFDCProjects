@@ -1,0 +1,18 @@
+<template>
+
+    <lightning-card icon-name="standard:account" variant="base" title="accounts with paginaiton">
+
+        <div class="newtesting">
+            <lightning-datatable id="Id" data={activeaccounts} columns={columns}>
+            </lightning-datatable>
+        </div>
+        <div class="paginationcontrols">
+            <button onclick={handlepervious}>Previous</button>
+            <span>Page{currentpage}of{totalpages}</span>
+            <button onclick={handlenext} >Next</button>
+        </div>
+
+
+    </lightning-card>
+    
+</template>

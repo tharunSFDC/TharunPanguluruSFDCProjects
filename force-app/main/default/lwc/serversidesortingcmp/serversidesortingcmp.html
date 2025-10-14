@@ -1,0 +1,11 @@
+<template>
+
+    <lightning-card icon-name="standard:account" variant="base" title="List of Opportunitys Server Side Sorting">
+
+        <lightning-datatable key-field="Id" data={tableopp} columns={columns}
+
+        sorted-by={sortbyfield} sorted-direction={sortdirection} onsort={handlesort}></lightning-datatable>
+
+    </lightning-card>
+    
+</template>

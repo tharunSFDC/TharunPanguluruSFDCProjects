@@ -1,0 +1,41 @@
+<template>
+
+    <lightning-card icon-name="standard:product_service_campaign_item" variant="base" title="Create New Product">
+        <div class="slds-p-around_x-large">
+        <lightning-layout>
+            <lightning-layout-item size="6" padding="around-small">
+
+                <lightning-input label="Product Name" name="name" type="text" onchange={getdata} required=true></lightning-input>
+                <lightning-input label="Product Code" name="code" type="text" onchange={getdata} required=true></lightning-input>
+                <lightning-input label="Product Family" name="family" type="text" onchange={getdata}></lightning-input>
+
+
+            </lightning-layout-item>
+
+            <lightning-layout-item size="6" padding="around-small">
+                <lightning-input label="Product Active" name="active" type="checkbox"
+                    onchange={getdata} required=true></lightning-input>
+
+                <lightning-input label="Product cost" name="cost" type="text" onchange={getdata}></lightning-input>
+                <lightning-input label="Product Description" name="des" type="text"
+                    onchange={getdata}></lightning-input>
+                <lightning-input label="Product Url" name="image" type="url"
+                    onchange={getdata}></lightning-input>
+
+            </lightning-layout-item>
+        </lightning-layout>
+        <lightning-quick-action-panel>
+
+
+            <lightning-button variant="brand" label="Save" onclick={handleSave}
+                class="slds-m-left_x-small"></lightning-button>
+                
+            <lightning-button variant="brand" label="Reset" onclick={handlereset}
+            class="slds-m-left_x-small"></lightning-button>
+
+        </lightning-quick-action-panel>
+    </div>
+
+    </lightning-card>
+
+</template>

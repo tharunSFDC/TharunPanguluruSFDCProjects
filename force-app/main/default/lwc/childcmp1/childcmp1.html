@@ -1,0 +1,18 @@
+<template>
+
+    <lightning-card title="Child  Cmp">
+        <div class="slds-box slds-box_x-small slds-text-align_center slds-m-around_x-small">Basic Carousel
+
+            <lightning-carousel>
+                <template for:each={torec} for:item="re">
+                    <lightning-carousel-image key={re.header} src={re.src} header={re.header}
+                        description={re.description}>
+                    </lightning-carousel-image>
+                </template>
+            </lightning-carousel>
+
+
+        </div>
+    </lightning-card>
+
+</template>

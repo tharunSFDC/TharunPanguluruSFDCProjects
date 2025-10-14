@@ -1,0 +1,24 @@
+.p1{
+    color: aquamarine;
+    font-size: xx-large;
+    border: 1px solid red;
+    background-color: brown;
+}
+.user{
+    color: pink;
+    font-size: larger;
+    font-family: 'Times New Roman', Times, serif;
+    border: 2px solid blueviolet;
+
+
+}
+
+.user:hover{
+    font-size: 16px;;
+    color: rgb(127, 142, 255);
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    border: 5px solid red;
+}
+.de{
+    color: var(--lwc-brand-dark-active);
+}

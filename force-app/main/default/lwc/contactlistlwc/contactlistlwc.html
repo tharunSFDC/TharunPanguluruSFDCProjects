@@ -1,0 +1,15 @@
+<template>
+
+    <lightning-card title="Contacts list for the Account">
+
+        <lightning-button label="Get" variant="brand" onclick={hanleSave}></lightning-button>
+
+        <template for:each={newlistcontacts} for:item="con">
+            <ul key={con.id}>
+                <li>{con.LastName}</li>
+            </ul>
+        </template>
+    </lightning-card>
+        
+    
+</template>

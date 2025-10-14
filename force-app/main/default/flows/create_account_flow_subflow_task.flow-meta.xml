@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Flow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>62.0</apiVersion>
+    <areMetricsLoggedToDataCloud>false</areMetricsLoggedToDataCloud>
+    <decisions>
+        <name>check_for_the_account_null_check</name>
+        <label>check for the account null check</label>
+        <locationX>182</locationX>
+        <locationY>539</locationY>
+        <defaultConnectorLabel>Default Outcome</defaultConnectorLabel>
+        <rules>
+            <name>is_accountid</name>
+            <conditionLogic>1 AND 2 AND (3 OR 4)</conditionLogic>
+            <conditions>
+                <leftValueReference>$Record.Id</leftValueReference>
+                <operator>IsNull</operator>
+                <rightValue>
+                    <booleanValue>false</booleanValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>$Record.County__c</leftValueReference>
+                <operator>IsNull</operator>
+                <rightValue>
+                    <booleanValue>false</booleanValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>$Record.County__c</leftValueReference>
+                <operator>NotEqualTo</operator>
+                <rightValue>
+                    <elementReference>$Record__Prior.County__c</elementReference>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>$Record__Prior.County__c</leftValueReference>
+                <operator>IsNull</operator>
+                <rightValue>
+                    <booleanValue>true</booleanValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>send_accoun_ids</targetReference>
+            </connector>
+            <label>is accountid</label>
+        </rules>
+    </decisions>
+    <decisions>
+        <name>Check_the_the_annula_revenue</name>
+        <label>Check the the annula revenue</label>
+        <locationX>380</locationX>
+        <locationY>323</locationY>
+        <defaultConnectorLabel>Default Outcome</defaultConnectorLabel>
+        <rules>
+            <name>Amount_greatre_than_100000</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>$Record.AnnualRevenue</leftValueReference>
+                <operator>GreaterThan</operator>
+                <rightValue>
+                    <numberValue>1000000.0</numberValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>passig_accountids_to_task_subflow</targetReference>
+            </connector>
+            <label>Amount greatre than 100000</label>
+        </rules>
+    </decisions>
+    <environments>Default</environments>
+    <interviewLabel>create account flow subflow task {!$Flow.CurrentDateTime}</interviewLabel>
+    <label>create account flow subflow task</label>
+    <processMetadataValues>
+        <name>BuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>CanvasMode</name>
+        <value>
+            <stringValue>AUTO_LAYOUT_CANVAS</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>OriginBuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processType>AutoLaunchedFlow</processType>
+    <recordUpdates>
+        <name>update_contacts</name>
+        <label>update contacts</label>
+        <locationX>50</locationX>
+        <locationY>755</locationY>
+        <inputReference>contactsupdatelist</inputReference>
+    </recordUpdates>
+    <start>
+        <locationX>254</locationX>
+        <locationY>0</locationY>
+        <connector>
+            <targetReference>Check_the_the_annula_revenue</targetReference>
+        </connector>
+        <object>Account</object>
+        <recordTriggerType>CreateAndUpdate</recordTriggerType>
+        <triggerType>RecordAfterSave</triggerType>
+    </start>
+    <status>Active</status>
+    <subflows>
+        <name>passig_accountids_to_task_subflow</name>
+        <label>passig accountids to task subflow</label>
+        <locationX>182</locationX>
+        <locationY>431</locationY>
+        <connector>
+            <targetReference>check_for_the_account_null_check</targetReference>
+        </connector>
+        <flowName>Create_a_Task_record</flowName>
+        <inputAssignments>
+            <name>acountids</name>
+            <value>
+                <elementReference>$Record.Id</elementReference>
+            </value>
+        </inputAssignments>
+    </subflows>
+    <subflows>
+        <name>send_accoun_ids</name>
+        <label>send accoun ids</label>
+        <locationX>50</locationX>
+        <locationY>647</locationY>
+        <connector>
+            <targetReference>update_contacts</targetReference>
+        </connector>
+        <flowName>Flow_triggers_46</flowName>
+        <inputAssignments>
+            <name>accountid</name>
+            <value>
+                <elementReference>$Record.Id</elementReference>
+            </value>
+        </inputAssignments>
+        <outputAssignments>
+            <assignToReference>contactsupdatelist</assignToReference>
+            <name>contactstoupdate</name>
+        </outputAssignments>
+    </subflows>
+    <variables>
+        <name>contactsupdatelist</name>
+        <dataType>SObject</dataType>
+        <isCollection>true</isCollection>
+        <isInput>true</isInput>
+        <isOutput>false</isOutput>
+        <objectType>Contact</objectType>
+    </variables>
+</Flow>

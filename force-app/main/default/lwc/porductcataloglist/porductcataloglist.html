@@ -1,0 +1,20 @@
+<template>
+
+    <lightning-card icon-name="standard:product_service_campaign_item" variant="base" title="List of Products">
+        <template if:true={listofproducts}>
+            <div class="product-grid">
+                <template for:each={listofproducts} for:item="product">
+                    <div key={product.Id} class="product-item">
+                            <img src={product.Product_image__c} alt={product.Name} width="200" height="250" />
+                            <p class="slds-badge slds-badge_brand">Product: {product.Name}</p>  
+                            <a href={mainurl}>
+                            <p><lightning-button label="View" onclick={handleview} name="View" value={product.Id}></lightning-button></p>
+                         </a>
+                    </div>
+                </template>
+            </div>
+        </template>
+
+    </lightning-card>
+
+</template>

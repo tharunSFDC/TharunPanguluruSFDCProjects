@@ -1,0 +1,46 @@
+<template>
+
+    <div class="container" style="background: white;padding: 16px;">
+        <div style="margin-bottom: 50px;">
+            <img src={imageurl} style="height: 90px; width: 150px;" />
+
+            <div style="display: inline-block;float:right;">
+                <div> Invoice #:{invoicdata.invno}</div>
+                <div> invdate #:{invoicdata.invdate}</div>
+                <div> invtotal #:{invoicdata.invtotal}</div>
+            </div>
+        </div>
+        <div>
+            <div style="display: inline-block;">
+                <div> invdesc #:{invoicdata.invdesc}</div>
+                <div> company #:{invoicdata.company}</div>
+                <div> address #:{invoicdata.address}</div>
+                <div> address2 #:{invoicdata.address2}</div>
+            </div>
+        </div>
+        <div style="display: inline-block;float: right; text-align: right;">
+            <div>{clientdata.clientname}</div>
+            <div>{clientdata.username}</div>
+            <div>{clientdata.email}</div>
+        </div>
+        <div style="background: blue;margin: 16px 0px;padding: 8px;">
+            <div style="display: inline-block;"> <strong>Services</strong></div>
+            <div style="display: inline-block; float: right;"><strong>Amount</strong> </div>
+        </div>
+
+        <template iterator:services={services} style="padding: 8px;">
+            <div key={services.value.name}>
+                <div style="display: inline-block;}">{services.value.name}</div>
+                <div style="display: inline-block;float: right;}">{services.value.Price}</div>
+            </div>
+            <div key={services.value.name} style="padding: 8px;">
+                <div if:true={services.last}>
+                    <div style="display: inline-block;float: right;}"><strong>Total Price:{totalPrice}</strong></div>
+                </div>
+            </div>
+        </template>
+
+    </div>
+    <lightning-button variant="brand" label="Generate Contact PDF" onclick={handlepdf}></lightning-button>
+
+</template>

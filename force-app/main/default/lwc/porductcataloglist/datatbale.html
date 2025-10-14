@@ -1,0 +1,76 @@
+<template>
+
+    <lightning-card icon-name="standard:product_service_campaign_item" variant="base" title="List of Products">
+        <table class="slds-table slds-table_cell-buffer slds-table_bordered slds-table_col-bordered"
+            aria-label="Example table of Opportunities with vertical borders">
+            <thead>
+                <tr class="slds-line-height_reset">
+                    <th class="" scope="col">
+                        <div class="slds-truncate" title="Product Image">Product Image</div>
+                    </th>
+                    <th class="" scope="col">
+                        <div class="slds-truncate" title="Product Name">Product Name</div>
+                    </th>
+                    <th class="" scope="col">
+                        <div class="slds-truncate" title="Product Active">IsActive</div>
+                    </th>
+                    <th class="" scope="col">
+                        <div class="slds-truncate" title="Product Date">ProductCode</div>
+                    </th>
+                    <th class="" scope="col">
+                        <div class="slds-truncate" title="Product Cost">Product Cost</div>
+                    </th>
+                    <th class="" scope="col">
+                        <div class="slds-truncate" title="Family">Family</div>
+                    </th>
+                    <th class="" scope="col">
+                        <div class="slds-truncate" title="Description">Description</div>
+                    </th>
+                    <th class="" scope="col">
+                        <div class="slds-truncate" title="Products">View Products</div>
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                <template for:each={listofproducts} for:item="po">
+                    <tr class="slds-hint-parent" key={po.id}>
+                        <th data-label="Opportunity Name" scope="row">
+                            <div class="slds-truncate" title="Name">
+                                <img src='{po.Product_image__c}' alt={po.Name} width="150" height="300">
+
+                            </div>
+                        </th>
+                        <td data-label="Product Name">
+                            <a href={mainurl} tabindex="-1"><div class="slds-truncate" title="Name">{po.Name}</div></a>
+                            
+                        </td>
+                        <td data-label="Product IsActive">
+                            <div class="slds-truncate" title="IsActive">{po.IsActive}</div>
+                        </td>
+                        <td data-label="Product ProductCode">
+                            <div class="slds-truncate" title="ProductCode">{po.ProductCode}</div>
+                        </td>
+                        <td data-label="Product Product_Cost__c">
+                            <div class="slds-truncate" title="Product_Cost__c">{po.Product_Cost__c}</div>
+                        </td>
+                        <td data-label="Product Family">
+                            <div class="slds-truncate" title="Family%">{po.Family}</div>
+                        </td>
+                        <td data-label="Product Description">
+                            <div class="slds-truncate" title="Description">{po.Description}</div>
+                        </td>
+                        <td><a href={mainurl}>
+                            <div class="slds-truncate" title="Description">
+                                <lightning-button label="View Product Details" variant="brand" onclick={handleview} value={po.Id}></lightning-button>
+                            </div></a>
+
+                        </td>
+                    </tr>
+                </template>
+            </tbody>
+        </table>
+
+
+    </lightning-card>
+
+</template>

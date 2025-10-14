@@ -1,0 +1,27 @@
+<template>
+
+    <lightning-card icon-name="standard:home" variant="base" title="Propertys">
+
+        <template if:true={properties.data}>
+            <div class="product-grid">
+
+                <template for:each={properties.data} for:item="pro">
+                    <div key={pro.Id} class="product-item">
+                        <img src={pro.Thumbnail__c} alt={pro.Name}>
+                        <p class="slds-badge slds-badge_brand">Property:>Name: {pro.Name}</p>
+                        <p class="slds-badge slds-badge_brand">Property:>SalesPrice: {pro.Sales_Price__c}</p>
+                        <p class="slds-badge slds-badge_brand">Property:>Number of Rooms: {pro.Number_of_Rooms__c}</p>
+                        <lightning-button label="View Property" variant="brand" value={pro.Id} onclick={handleid}></lightning-button>
+    
+                    </div>
+                </template>
+            </div>
+            
+
+        </template>
+
+
+
+    </lightning-card>
+    
+</template>

@@ -1,0 +1,12 @@
+<template>
+
+    <lightning-card icon-name="standard:contact" variant="base">
+
+        <lightning-input label="Lastname" name="lastname" type="text" onchange={handledata}></lightning-input>
+        <lightning-button label="Save" variant="brand" onclick={handlesave}></lightning-button>
+
+        <c-contactlistlwc contactidsfromparetn={contactid}></c-contactlistlwc>
+
+    </lightning-card>
+    
+</template>

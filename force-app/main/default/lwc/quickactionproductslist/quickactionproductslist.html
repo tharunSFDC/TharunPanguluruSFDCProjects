@@ -1,0 +1,50 @@
+<template>
+
+    <lightning-card icon-name="standard:product_service_campaign_item" variant="base" title="Productslist">
+        <table class="slds-table slds-table_cell-buffer slds-table_bordered"
+            aria-label="Example default base table of Opportunities">
+            <thead>
+                <tr class="slds-line-height_reset">
+                    <th class="" scope="col">
+                        <div class="slds-truncate" title="Product Image">Product Image</div>
+                    </th>
+                    <th class="" scope="col">
+                        <div class="slds-truncate" title=" Name">Name</div>
+                    </th>
+                    <th class="" scope="col">
+                        <div class="slds-truncate" title=" Description">Description</div>
+                    </th>
+                    <th class="" scope="col">
+                        <div class="slds-truncate" title="Product">View Product</div>
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                <template for:each={listofproducts} for:item="po">
+                <tr class="slds-hint-parent" key={po.Id}>
+                    <th data-label="Product" scope="row">
+                        <div class="slds-truncate" title="Cloudhub">
+                            <img src={po.Product_image__c} alt={po.Name} width="100" height="100">
+                        </div>
+                    </th>
+                    <td data-label="Product">
+                        <div class="slds-truncate" title="Cloudhub"><i style="color:rgb(255, 0, 183);">{po.Name}</i></div>
+                    </td>
+                    <td data-label="Product">
+                        <div class="slds-truncate" title="Cloudhub"><i style="color:rgb(8, 0, 255);">{po.Description}</i></div>
+                    </td>
+                    <td data-label="Product">
+                        <a href={mainurl}>
+                        <div class="slds-truncate" title="4/14/2015">
+                            <lightning-button label="View Details" variant="brand" onclick={handleview} value={po.Id}></lightning-button>
+                        </div></a>
+                    </td>
+                </tr>
+            </template>
+            </tbody>
+        </table>
+
+
+    </lightning-card>
+
+</template>

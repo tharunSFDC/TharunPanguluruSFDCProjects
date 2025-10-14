@@ -1,0 +1,12 @@
+<template>
+
+    <lightning-card icon-name="standard:account" variant="base">
+
+        <lightning-record-picker label="Accounts" placeholder="Search Accounts..." object-api-name="Account"
+            onchange={handleAccountid} filter={filter}></lightning-record-picker>
+
+    </lightning-card>
+    </br>
+    <lightning-datatable key-field="Id" data={contactsdata} columns={columns}></lightning-datatable>
+
+</template>
