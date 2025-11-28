@@ -6,6 +6,7 @@ public  class contacthelperclass {
     {
         set<id> accids = new set<id>();
         list<Account> accupdate = new list<Account>();
+        map<id,Contact> oldcontacmap = new map<id,Contact>();
         if(newlist.isempty())
         {
             return;
