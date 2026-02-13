@@ -1,0 +1,32 @@
+<template>
+    <lightning-card title="Apply Opportunity Discount">
+        <div class="slds-p-around_medium">
+
+            <!-- Discount Input -->
+            <lightning-input type="number" label="Apply Discount (%)" value={discountpercent} onchange={handleDiscount}>
+            </lightning-input>
+
+            <!-- Final Amount Display -->
+            <div class="slds-m-top_medium">
+                <p>
+                    <strong>Final Amount:</strong> {finalamount}
+                </p>
+            </div>
+
+            <!-- Apply Button -->
+            <div class="slds-m-top_medium">
+                <lightning-button label="Apply Discount" variant="brand" onclick={applyDiscountValue}>
+                </lightning-button>
+            </div>
+            <div>
+                <template if:true={startflowflag}>
+                    <lightning-flow flow-api-name="OpportunityDiscountScreen" flow-input-variables={flowinput}
+                        onstatuschange={handleStatusChange}>
+
+                    </lightning-flow>
+                </template>
+
+            </div>
+        </div>
+    </lightning-card>
+</template>
