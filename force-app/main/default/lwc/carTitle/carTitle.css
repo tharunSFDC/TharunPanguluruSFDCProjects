@@ -1,0 +1,14 @@
+.center{
+    padding:0 12px;
+}
+c-cartilelist{
+    min-width: 200px;
+    flex: 1;
+}
+.content{
+    display: flex;
+    flex-wrap: wrap;
+}
+.wrapper{
+    background: #e2e2e2;
+}

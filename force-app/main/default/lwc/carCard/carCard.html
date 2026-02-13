@@ -1,0 +1,23 @@
+<template>
+    <lightning-card icon-name="standard:apex_plugin" title={carName}>
+        <template if:true={recordId}>
+            <lightning-button-icon icon-name="utility:expand_alt" slot="actions" onclick={handleonclick}></lightning-button-icon>
+            <div class="slds-m-horizontal_medium">
+                <img src={carPictureUrl} alt={carName} />
+                <lightning-record-view-form onload={handlerecordloaded} record-id={recordId} object-api-name="Car__c"
+                    density="compact">
+                    <lightning-output-field field-name={categoryfield}></lightning-output-field>
+                    <lightning-output-field field-name={makefield}></lightning-output-field>
+                    <lightning-output-field field-name={mrpfield}></lightning-output-field>
+                    <section>Other Features</section>
+                    <lightning-output-field field-name={fuelfield}></lightning-output-field>
+                    <lightning-output-field field-name={seatsfield}></lightning-output-field>
+                    <lightning-output-field field-name={controlfield}></lightning-output-field>
+                </lightning-record-view-form>
+            </div>
+        </template>
+        <template if:false={recordId}>
+            <c-placeholdercmp message="Select a car to checkout the details"></c-placeholdercmp>
+        </template>
+    </lightning-card>
+</template>
